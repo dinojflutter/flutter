@@ -996,6 +996,7 @@ class StartupTest {
       const int maxFailures = 3;
       int currentFailures = 0;
       for (int i = 0; i < iterations; i += 1) {
+<<<<<<< HEAD
         // Startup should not take more than a few minutes. After 10 minutes,
         // take a screenshot to help debug.
         final Timer timer = Timer(const Duration(minutes: 10), () async {
@@ -1005,6 +1006,8 @@ class StartupTest {
             'screenshot_startup_${DateTime.now().toLocal().toIso8601String()}.png',
           );
         });
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         final int result = await flutter(
           'run',
           options: <String>[
@@ -1022,7 +1025,10 @@ class StartupTest {
           environment: runEnvironment,
           canFail: true,
         );
+<<<<<<< HEAD
         timer.cancel();
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         if (result == 0) {
           final Map<String, dynamic> data = json.decode(
             file('${testOutputDirectory(testDirectory)}/start_up_info.json').readAsStringSync(),

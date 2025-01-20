@@ -432,9 +432,29 @@ String generateTestEntrypoint({
 ''');
   }
   return '''
+<<<<<<< HEAD
 // @dart = ${languageVersion.major}.${languageVersion.minor}
 
 ${importMainStatements.join('\n')}
+=======
+  // @dart = ${languageVersion.major}.${languageVersion.minor}
+  import 'org-dartlang-app:///$relativeTestPath' as test;
+  import 'dart:ui' as ui;
+  import 'dart:ui_web' as ui_web;
+  import 'dart:html';
+  import 'dart:js';
+  ${testConfigPath != null ? "import '${Uri.file(testConfigPath)}' as test_config;" : ""}
+  import 'package:stream_channel/stream_channel.dart';
+  import 'package:flutter_test/flutter_test.dart';
+  import 'package:test_api/backend.dart';
+
+  Future<void> main() async {
+    ui_web.debugEmulateFlutterTesterEnvironment = true;
+    await ui.webOnlyInitializePlatform();
+    webGoldenComparator = DefaultWebGoldenComparator(Uri.parse('${Uri.file(absolutePath)}'));
+    (ui.window as dynamic).debugOverrideDevicePixelRatio(3.0);
+    (ui.window as dynamic).webOnlyDebugPhysicalSizeOverride = const ui.Size(2400, 1800);
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
 ${importTestConfigStatements.join('\n')}
 

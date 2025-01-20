@@ -107,8 +107,12 @@ class SelectionArea extends StatefulWidget {
   State<StatefulWidget> createState() => SelectionAreaState();
 }
 
+<<<<<<< HEAD
 /// State for a [SelectionArea].
 class SelectionAreaState extends State<SelectionArea> {
+=======
+class _SelectionAreaState extends State<SelectionArea> {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   FocusNode get _effectiveFocusNode => widget.focusNode ?? (_internalNode ??= FocusNode());
   FocusNode? _internalNode;
   final GlobalKey<SelectableRegionState> _selectableRegionKey = GlobalKey<SelectableRegionState>();

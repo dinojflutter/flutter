@@ -352,6 +352,7 @@ Error launching application on iPhone.''',
           buildSettings: buildSettingsWithDevTeam,
         ),
       );
+<<<<<<< HEAD
       final MemoryFileSystem fs = MemoryFileSystem.test();
       await diagnoseXcodeBuildFailure(
         buildResult,
@@ -361,6 +362,10 @@ Error launching application on iPhone.''',
         platform: SupportedPlatform.ios,
         project: FakeFlutterProject(fileSystem: fs),
       );
+=======
+
+      await diagnoseXcodeBuildFailure(buildResult, testUsage, logger);
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       expect(
         logger.errorText,
         contains(missingPlatformInstructions('iOS 17.0')),

@@ -3007,6 +3007,7 @@ void main() {
       ),
     );
 
+<<<<<<< HEAD
     final TestGesture gesture = await tester.startGesture(tester.getCenter(find.byType(Tooltip)));
     await tester.pumpWidget(const SizedBox());
     expect(tester.takeException(), isNull);
@@ -3014,6 +3015,11 @@ void main() {
     // Finish gesture to release resources.
     await gesture.up();
     await tester.pumpAndSettle();
+=======
+    await tester.startGesture(tester.getCenter(find.byType(Tooltip)));
+    await tester.pumpWidget(const SizedBox());
+    expect(tester.takeException(), isNull);
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   });
 
   testWidgets('Tooltip does not crash when showing the tooltip but the OverlayPortal is unmounted, during dispose', (WidgetTester tester) async {
@@ -3033,6 +3039,7 @@ void main() {
     );
 
     final TooltipState tooltipState = tester.state(find.byType(Tooltip));
+<<<<<<< HEAD
     final TestGesture gesture = await tester.startGesture(tester.getCenter(find.byType(Tooltip)));
     tooltipState.ensureTooltipVisible();
     await tester.pumpWidget(const SizedBox());
@@ -3041,6 +3048,12 @@ void main() {
     // Finish gesture to release resources.
     await gesture.up();
     await tester.pumpAndSettle();
+=======
+    await tester.startGesture(tester.getCenter(find.byType(Tooltip)));
+    tooltipState.ensureTooltipVisible();
+    await tester.pumpWidget(const SizedBox());
+    expect(tester.takeException(), isNull);
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   });
 
   testWidgets('Tooltip is not selectable', (WidgetTester tester) async {

@@ -6,10 +6,14 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 import 'package:process/process.dart';
+<<<<<<< HEAD
 import 'package:xml/xml.dart';
 import 'package:xml/xpath.dart';
 
 import '../base/common.dart';
+=======
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 import '../base/error_handling_io.dart';
 import '../base/file_system.dart';
 import '../base/io.dart';
@@ -61,6 +65,10 @@ class XcodeDebug {
     required String deviceId,
     required List<String> launchArguments,
   }) async {
+<<<<<<< HEAD
+=======
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     // If project is not already opened in Xcode, open it.
     if (!await _isProjectOpenInXcode(project: project)) {
       final bool openResult = await _openProjectInXcode(xcodeWorkspace: project.xcodeWorkspace);
@@ -413,6 +421,7 @@ class XcodeDebug {
       verboseLogging: verboseLogging,
     );
   }
+<<<<<<< HEAD
 
   /// Ensure the Xcode project is set up to launch an LLDB debugger. If these
   /// settings are not set, the launch will fail with a "Cannot create a
@@ -456,6 +465,8 @@ and ensure "Debug executable" is checked in the "Info" tab.
       _logger.printError('Failed to parse ${schemeFile.path}: $exception');
     }
   }
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }
 
 @visibleForTesting
@@ -468,8 +479,15 @@ class XcodeAutomationScriptResponse {
 
   factory XcodeAutomationScriptResponse.fromJson(Map<String, Object?> data) {
     XcodeAutomationScriptDebugResult? debugResult;
+<<<<<<< HEAD
     if (data case {'debugResult': final Map<String, Object?> resultData}) {
       debugResult = XcodeAutomationScriptDebugResult.fromJson(resultData);
+=======
+    if (data['debugResult'] != null && data['debugResult'] is Map<String, Object?>) {
+      debugResult = XcodeAutomationScriptDebugResult.fromJson(
+        data['debugResult']! as Map<String, Object?>,
+      );
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     }
     return XcodeAutomationScriptResponse._(
       status: data['status'] is bool? ? data['status'] as bool? : null,
@@ -499,7 +517,11 @@ class XcodeAutomationScriptDebugResult {
     );
   }
 
+<<<<<<< HEAD
   /// Whether this scheme action has completed (successfully or otherwise). Will
+=======
+  /// Whether this scheme action has completed (sucessfully or otherwise). Will
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   /// be false if still running.
   final bool? completed;
 

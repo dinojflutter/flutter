@@ -2988,10 +2988,13 @@ class _SomeRenderTwoDimensionalViewport extends RenderTwoDimensionalViewport { /
   }
 
   @override
+<<<<<<< HEAD
   RenderBox? getChildFor(_TestVicinity vicinity) { // Analysis would fail without covariant
     return super.getChildFor(vicinity);
   }
 
   @override
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   void layoutChildSequence() {}
 }

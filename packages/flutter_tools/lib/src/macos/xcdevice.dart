@@ -70,7 +70,10 @@ class XCDevice {
     required Platform platform,
     required IProxy iproxy,
     required FileSystem fileSystem,
+<<<<<<< HEAD
     required Analytics analytics,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     @visibleForTesting
     IOSCoreDeviceControl? coreDeviceControl,
     XcodeDebug? xcodeDebug,
@@ -123,7 +126,10 @@ class XCDevice {
   final IProxy _iProxy;
   final IOSCoreDeviceControl _coreDeviceControl;
   final XcodeDebug _xcodeDebug;
+<<<<<<< HEAD
   final Analytics _analytics;
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
   List<Object>? _cachedListResults;
 
@@ -640,7 +646,10 @@ class XCDevice {
           xcodeDebug: _xcodeDebug,
           platform: globals.platform,
           devModeEnabled: devModeEnabled,
+<<<<<<< HEAD
           isPaired: isPaired,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
           isCoreDevice: coreDevice != null,
         );
       }

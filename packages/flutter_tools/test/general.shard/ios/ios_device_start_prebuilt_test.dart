@@ -904,6 +904,7 @@ void main() {
       }, overrides: <Type, Generator>{
         MDnsVmServiceDiscovery: () => FakeMDnsVmServiceDiscovery(),
       });
+<<<<<<< HEAD
 
       group('IOSDevice.startApp attaches in debug mode via device logging', () {
         late FakeMDnsVmServiceDiscovery mdnsDiscovery;
@@ -1038,6 +1039,8 @@ void main() {
       }, overrides: <Type, Generator>{
         MDnsVmServiceDiscovery: () => FakeMDnsVmServiceDiscovery(returnsNull: true),
       });
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     });
   });
 }
@@ -1052,7 +1055,10 @@ IOSDevice setUpIOSDevice({
   bool isCoreDevice = false,
   IOSCoreDeviceControl? coreDeviceControl,
   FakeXcodeDebug? xcodeDebug,
+<<<<<<< HEAD
   FakePlatform? platform,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }) {
   final Artifacts artifacts = Artifacts.test();
   final FakePlatform macPlatform = platform ?? FakePlatform(

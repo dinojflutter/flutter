@@ -3,6 +3,11 @@
 // found in the LICENSE file.
 
 import 'dart:ui_web' as ui_web;
+<<<<<<< HEAD
+=======
+
+import '../services/dom.dart';
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
 import 'platform.dart' as platform;
 
@@ -25,6 +30,7 @@ platform.TargetPlatform? get _testPlatform {
   platform.TargetPlatform? testPlatform;
   assert(() {
     if (ui_web.debugEmulateFlutterTesterEnvironment) {
+<<<<<<< HEAD
       // Return the overridden operatingSystem in tests, if any...
       if (ui_web.browser.debugOperatingSystemOverride != null) {
         testPlatform =
@@ -33,6 +39,9 @@ platform.TargetPlatform? get _testPlatform {
         // Fall back to `android` for tests.
         testPlatform = platform.TargetPlatform.android;
       }
+=======
+      result = platform.TargetPlatform.android;
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     }
     return true;
   }());

@@ -74,8 +74,6 @@ enum _MediaQueryAspect {
   invertColors,
   /// Specifies the aspect corresponding to [MediaQueryData.highContrast].
   highContrast,
-  /// Specifies the aspect corresponding to [MediaQueryData.onOffSwitchLabels].
-  onOffSwitchLabels,
   /// Specifies the aspect corresponding to [MediaQueryData.disableAnimations].
   disableAnimations,
   /// Specifies the aspect corresponding to [MediaQueryData.boldText].
@@ -181,7 +179,6 @@ class MediaQueryData {
     this.accessibleNavigation = false,
     this.invertColors = false,
     this.highContrast = false,
-    this.onOffSwitchLabels = false,
     this.disableAnimations = false,
     this.boldText = false,
     this.navigationMode = NavigationMode.traditional,
@@ -261,7 +258,6 @@ class MediaQueryData {
       disableAnimations = platformData?.disableAnimations ?? view.platformDispatcher.accessibilityFeatures.disableAnimations,
       boldText = platformData?.boldText ?? view.platformDispatcher.accessibilityFeatures.boldText,
       highContrast = platformData?.highContrast ?? view.platformDispatcher.accessibilityFeatures.highContrast,
-      onOffSwitchLabels = platformData?.onOffSwitchLabels ?? view.platformDispatcher.accessibilityFeatures.onOffSwitchLabels,
       alwaysUse24HourFormat = platformData?.alwaysUse24HourFormat ?? view.platformDispatcher.alwaysUse24HourFormat,
       navigationMode = platformData?.navigationMode ?? NavigationMode.traditional,
       gestureSettings = DeviceGestureSettings.fromView(view),
@@ -516,15 +512,6 @@ class MediaQueryData {
   /// or above.
   final bool highContrast;
 
-  /// Whether the user requested to show on/off labels inside switches on iOS,
-  /// via Settings -> Accessibility -> Display & Text Size -> On/Off Labels.
-  ///
-  /// See also:
-  ///
-  ///  * [dart:ui.PlatformDispatcher.accessibilityFeatures], where the setting
-  ///    originates.
-  final bool onOffSwitchLabels;
-
   /// Whether the platform is requesting that animations be disabled or reduced
   /// as much as possible.
   ///
@@ -619,7 +606,6 @@ class MediaQueryData {
     EdgeInsets? systemGestureInsets,
     bool? alwaysUse24HourFormat,
     bool? highContrast,
-    bool? onOffSwitchLabels,
     bool? disableAnimations,
     bool? invertColors,
     bool? accessibleNavigation,
@@ -645,7 +631,6 @@ class MediaQueryData {
       alwaysUse24HourFormat: alwaysUse24HourFormat ?? this.alwaysUse24HourFormat,
       invertColors: invertColors ?? this.invertColors,
       highContrast: highContrast ?? this.highContrast,
-      onOffSwitchLabels: onOffSwitchLabels ?? this.onOffSwitchLabels,
       disableAnimations: disableAnimations ?? this.disableAnimations,
       accessibleNavigation: accessibleNavigation ?? this.accessibleNavigation,
       boldText: boldText ?? this.boldText,
@@ -838,7 +823,6 @@ class MediaQueryData {
         && other.systemGestureInsets == systemGestureInsets
         && other.alwaysUse24HourFormat == alwaysUse24HourFormat
         && other.highContrast == highContrast
-        && other.onOffSwitchLabels == onOffSwitchLabels
         && other.disableAnimations == disableAnimations
         && other.invertColors == invertColors
         && other.accessibleNavigation == accessibleNavigation
@@ -860,7 +844,6 @@ class MediaQueryData {
     viewInsets,
     alwaysUse24HourFormat,
     highContrast,
-    onOffSwitchLabels,
     disableAnimations,
     invertColors,
     accessibleNavigation,
@@ -885,7 +868,6 @@ class MediaQueryData {
       'alwaysUse24HourFormat: $alwaysUse24HourFormat',
       'accessibleNavigation: $accessibleNavigation',
       'highContrast: $highContrast',
-      'onOffSwitchLabels: $onOffSwitchLabels',
       'disableAnimations: $disableAnimations',
       'invertColors: $invertColors',
       'boldText: $boldText',
@@ -1545,6 +1527,7 @@ class MediaQuery extends InheritedModel<_MediaQueryAspect> {
   /// {@macro flutter.widgets.media_query.MediaQuery.dontUseMaybeOf}
   static bool? maybeHighContrastOf(BuildContext context) => _maybeOf(context, _MediaQueryAspect.highContrast)?.highContrast;
 
+<<<<<<< HEAD
   /// Returns [MediaQueryData.onOffSwitchLabels] for the nearest [MediaQuery]
   /// ancestor or false, if no such ancestor exists.
   ///
@@ -1567,6 +1550,10 @@ class MediaQuery extends InheritedModel<_MediaQueryAspect> {
 
   /// Returns [MediaQueryData.disableAnimations] for the nearest [MediaQuery]
   /// ancestor or false, if no such ancestor exists.
+=======
+  /// Returns disableAnimations for the nearest MediaQuery ancestor or
+  /// [Brightness.light], if no such ancestor exists.
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   ///
   /// Use of this method will cause the given [context] to rebuild any time that
   /// the [MediaQueryData.disableAnimations] property of the ancestor
@@ -1696,6 +1683,7 @@ class MediaQuery extends InheritedModel<_MediaQueryAspect> {
 
   @override
   bool updateShouldNotifyDependent(MediaQuery oldWidget, Set<Object> dependencies) {
+<<<<<<< HEAD
     return dependencies.any((Object dependency) => dependency is _MediaQueryAspect && switch (dependency) {
       _MediaQueryAspect.size               => data.size != oldWidget.data.size,
       _MediaQueryAspect.orientation        => data.orientation != oldWidget.data.orientation,
@@ -1719,6 +1707,87 @@ class MediaQuery extends InheritedModel<_MediaQueryAspect> {
       _MediaQueryAspect.alwaysUse24HourFormat => data.alwaysUse24HourFormat != oldWidget.data.alwaysUse24HourFormat,
       _MediaQueryAspect.supportsShowingSystemContextMenu => data.supportsShowingSystemContextMenu != oldWidget.data.supportsShowingSystemContextMenu,
     });
+=======
+    for (final Object dependency in dependencies) {
+      if (dependency is _MediaQueryAspect) {
+        switch (dependency) {
+          case _MediaQueryAspect.size:
+            if (data.size != oldWidget.data.size) {
+              return true;
+            }
+          case _MediaQueryAspect.orientation:
+            if (data.orientation != oldWidget.data.orientation) {
+              return true;
+            }
+          case _MediaQueryAspect.devicePixelRatio:
+            if (data.devicePixelRatio != oldWidget.data.devicePixelRatio) {
+              return true;
+            }
+          case _MediaQueryAspect.textScaleFactor:
+            if (data.textScaleFactor != oldWidget.data.textScaleFactor) {
+              return true;
+            }
+          case _MediaQueryAspect.platformBrightness:
+            if (data.platformBrightness != oldWidget.data.platformBrightness) {
+              return true;
+            }
+          case _MediaQueryAspect.padding:
+            if (data.padding != oldWidget.data.padding) {
+              return true;
+            }
+          case _MediaQueryAspect.viewInsets:
+            if (data.viewInsets != oldWidget.data.viewInsets) {
+              return true;
+            }
+          case _MediaQueryAspect.systemGestureInsets:
+            if (data.systemGestureInsets != oldWidget.data.systemGestureInsets) {
+              return true;
+            }
+          case _MediaQueryAspect.viewPadding:
+            if (data.viewPadding != oldWidget.data.viewPadding) {
+              return true;
+            }
+          case _MediaQueryAspect.alwaysUse24HourFormat:
+            if (data.alwaysUse24HourFormat != oldWidget.data.alwaysUse24HourFormat) {
+              return true;
+            }
+          case _MediaQueryAspect.accessibleNavigation:
+            if (data.accessibleNavigation != oldWidget.data.accessibleNavigation) {
+              return true;
+            }
+          case _MediaQueryAspect.invertColors:
+            if (data.invertColors != oldWidget.data.invertColors) {
+              return true;
+            }
+          case _MediaQueryAspect.highContrast:
+            if (data.highContrast != oldWidget.data.highContrast) {
+              return true;
+            }
+          case _MediaQueryAspect.disableAnimations:
+            if (data.disableAnimations != oldWidget.data.disableAnimations) {
+              return true;
+            }
+          case _MediaQueryAspect.boldText:
+            if (data.boldText != oldWidget.data.boldText) {
+              return true;
+            }
+          case _MediaQueryAspect.navigationMode:
+            if (data.navigationMode != oldWidget.data.navigationMode) {
+              return true;
+            }
+          case _MediaQueryAspect.gestureSettings:
+            if (data.gestureSettings != oldWidget.data.gestureSettings) {
+              return true;
+            }
+          case _MediaQueryAspect.displayFeatures:
+            if (data.displayFeatures != oldWidget.data.displayFeatures) {
+              return true;
+            }
+        }
+      }
+    }
+    return false;
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   }
 }
 

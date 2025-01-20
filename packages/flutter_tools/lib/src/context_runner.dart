@@ -373,7 +373,10 @@ Future<T> runInContext<T>(
           dyLdLibEntry: globals.cache.dyLdLibEntry,
         ),
         fileSystem: globals.fs,
+<<<<<<< HEAD
         analytics: globals.analytics,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       ),
       XcodeProjectInterpreter: () => XcodeProjectInterpreter(
         logger: globals.logger,

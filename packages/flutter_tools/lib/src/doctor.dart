@@ -149,7 +149,11 @@ class _DefaultDoctorValidatorsProvider implements DoctorValidatorsProvider {
         GroupedValidator(<DoctorValidator>[
           XcodeValidator(
             xcode: globals.xcode!,
+<<<<<<< HEAD
             userMessages: globals.userMessages,
+=======
+            userMessages: userMessages,
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             iosSimulatorUtils: globals.iosSimulatorUtils!,
           ),
           globals.cocoapodsValidator!,

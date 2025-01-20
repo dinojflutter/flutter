@@ -225,6 +225,7 @@ void main() {
   });
 
   testWithoutContext(
+<<<<<<< HEAD
       'correctly parse sample result on < Xcode 16.', () async {
     final XCResultGenerator generator = setupGenerator(
       resultJson: kSampleResultJsonNoIssues,
@@ -238,6 +239,8 @@ void main() {
   });
 
   testWithoutContext(
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       'error: `xcresulttool get` process fail should return an `XCResult` with stderr as `parsingErrorMessage`.',
       () async {
     const String fakeStderr = 'Fake: fail to parse result json.';

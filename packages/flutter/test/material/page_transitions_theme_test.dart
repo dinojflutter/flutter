@@ -433,6 +433,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(builtCount, 1);
   }, variant: TargetPlatformVariant.only(TargetPlatform.android));
+<<<<<<< HEAD
 
   testWidgets('predictive back gestures pop the route on all platforms regardless of whether their transition handles predictive back', (WidgetTester tester) async {
     final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
@@ -733,4 +734,6 @@ void main() {
     // Verify that the transition successfully completed.
     expect(find.text('Back to home route...'), findsOneWidget);
   }, variant: TargetPlatformVariant.all());
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }

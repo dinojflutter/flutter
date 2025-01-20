@@ -275,13 +275,21 @@ void main() {
               'open',
               <String>[
                 '-a',
+<<<<<<< HEAD
                 '/non_existent_path',
+=======
+                '/non_existant_path',
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
                 '-g',
                 '-j',
                 '-F',
                 xcworkspace.path,
               ],
+<<<<<<< HEAD
               'The application /non_existent_path cannot be opened for an unexpected reason',
+=======
+              'The application /non_existant_path cannot be opened for an unexpected reason',
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             ),
           ),
         ]);
@@ -304,7 +312,11 @@ void main() {
 
         expect(
           logger.errorText,
+<<<<<<< HEAD
           contains('The application /non_existent_path cannot be opened for an unexpected reason'),
+=======
+          contains('The application /non_existant_path cannot be opened for an unexpected reason'),
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
         expect(fakeProcessManager, hasNoRemainingExpectations);
         expect(status, false);
@@ -807,7 +819,11 @@ void main() {
         expect(status, isTrue);
       });
 
+<<<<<<< HEAD
       testWithoutContext('prints error message when deleting temporary directory that is nonexistent', () async {
+=======
+      testWithoutContext('prints error message when deleting temporary directory that is nonexistant', () async {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         final Xcode xcode = setupXcode(
           fakeProcessManager: fakeProcessManager,
           fileSystem: fileSystem,
@@ -914,7 +930,11 @@ void main() {
         expect(exitStatus, isTrue);
       });
 
+<<<<<<< HEAD
       testWithoutContext('does not crash when deleting temporary directory that is nonexistent when force exiting', () async {
+=======
+      testWithoutContext('does not crash when deleting temporary directory that is nonexistant when force exiting', () async {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         final Xcode xcode = setupXcode(
           fakeProcessManager: FakeProcessManager.any(),
           fileSystem: fileSystem,
@@ -1064,6 +1084,7 @@ void main() {
         expect(status, isFalse);
       });
     });
+<<<<<<< HEAD
 
     group('ensureXcodeDebuggerLaunchAction', () {
       late Xcode xcode;
@@ -1154,6 +1175,8 @@ void main() {
         expect(logger.errorText.contains('Failed to parse'), isTrue);
       });
     });
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   });
 
   group('Debug project through Xcode with app bundle', () {
@@ -1251,6 +1274,7 @@ class FakeProcess extends Fake implements Process {
     return true;
   }
 }
+<<<<<<< HEAD
 
 const String validSchemeXml = '''
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1337,3 +1361,5 @@ const String disabledDebugExecutableSchemeXml = '''
    </ArchiveAction>
 </Scheme>
 ''';
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06

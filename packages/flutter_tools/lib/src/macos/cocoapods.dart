@@ -21,7 +21,10 @@ import '../cache.dart';
 import '../ios/xcodeproj.dart';
 import '../migrations/cocoapods_script_symlink.dart';
 import '../migrations/cocoapods_toolchain_directory_migration.dart';
+<<<<<<< HEAD
 import '../project.dart';
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 import '../reporting/reporting.dart';
 
 const String noCocoaPodsConsequence = '''

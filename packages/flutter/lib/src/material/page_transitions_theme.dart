@@ -871,6 +871,7 @@ class PageTransitionsTheme with Diagnosticable {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
+<<<<<<< HEAD
     return _PageTransitionsThemeTransitions<T>(
       builders: builders,
       route: route,
@@ -884,6 +885,14 @@ class PageTransitionsTheme with Diagnosticable {
   ///
   /// {@macro flutter.widgets.delegatedTransition}
   DelegatedTransitionBuilder? delegatedTransition(TargetPlatform platform) {
+=======
+    TargetPlatform platform = Theme.of(context).platform;
+
+    if (CupertinoRouteTransitionMixin.isPopGestureInProgress(route)) {
+      platform = TargetPlatform.iOS;
+    }
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     final PageTransitionsBuilder matchingBuilder =
       builders[platform] ?? const ZoomPageTransitionsBuilder();
 

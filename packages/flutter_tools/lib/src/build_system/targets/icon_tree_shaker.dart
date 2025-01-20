@@ -206,10 +206,14 @@ class IconTreeShaker {
                        'using codepoints $codePointsString');
     final Process fontSubsetProcess = await _processManager.start(cmd);
     try {
+<<<<<<< HEAD
       await ProcessUtils.writelnToStdinUnsafe(
         stdin: fontSubsetProcess.stdin,
         line: codePointsString,
       );
+=======
+      fontSubsetProcess.stdin.writeln(codePointsString);
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       await fontSubsetProcess.stdin.flush();
       await fontSubsetProcess.stdin.close();
     } on Exception {

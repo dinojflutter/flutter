@@ -84,6 +84,14 @@ void main() {
         userMessages: UserMessages(),
         iosSimulatorUtils: FakeIOSSimulatorUtils(),
       );
+<<<<<<< HEAD
+=======
+      final XcodeValidator validator = XcodeValidator(
+        xcode: xcode,
+        userMessages: UserMessages(),
+        iosSimulatorUtils: FakeIOSSimulatorUtils(),
+      );
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       final ValidationResult result = await validator.validate();
       expect(result.type, ValidationType.partial);
       expect(result.messages.last.type, ValidationMessageType.hint);

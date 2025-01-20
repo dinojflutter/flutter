@@ -52,10 +52,18 @@ Future<Map<String, double>> readJsonResults(Process process) {
       // See https://github.com/flutter/flutter/issues/19208
       process.stdin.write('q');
       await process.stdin.flush();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       // Give the process a couple of seconds to exit and run shutdown hooks
       // before sending kill signal.
       // TODO(fujino): https://github.com/flutter/flutter/issues/134566
       await Future<void>.delayed(const Duration(seconds: 2));
+<<<<<<< HEAD
+=======
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       // Also send a kill signal in case the `q` above didn't work.
       process.kill(ProcessSignal.sigint);
       try {

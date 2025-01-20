@@ -19,11 +19,14 @@ TaskFunction createMicrobenchmarkTask({
   bool? enableImpeller,
   Map<String, String> environment = const <String, String>{},
 }) {
+<<<<<<< HEAD
 
   // Generate a seed for this test stable around the date.
   final DateTime seedDate = DateTime.now().toUtc().subtract(const Duration(hours: 7));
   final int seed = DateTime(seedDate.year, seedDate.month, seedDate.day).hashCode;
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   return () async {
     final Device device = await devices.workingDevice;
     await device.unlock();

@@ -131,6 +131,7 @@ class CupertinoSwitch extends StatefulWidget {
     this.inactiveThumbColor,
     this.applyTheme,
     this.focusColor,
+<<<<<<< HEAD
     this.onLabelColor,
     this.offLabelColor,
     this.activeThumbImage,
@@ -141,6 +142,8 @@ class CupertinoSwitch extends StatefulWidget {
     this.trackOutlineWidth,
     this.thumbIcon,
     this.mouseCursor,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     this.focusNode,
     this.onFocusChange,
     this.autofocus = false,
@@ -260,6 +263,7 @@ class CupertinoSwitch extends StatefulWidget {
   /// and a saturation of 0.835.
   final Color? focusColor;
 
+<<<<<<< HEAD
   /// The color to use for the accessibility label when the switch is on.
   ///
   /// Defaults to [CupertinoColors.white] when null.
@@ -415,6 +419,8 @@ class CupertinoSwitch extends StatefulWidget {
   ///    either a [MouseCursor] or a [WidgetStateProperty].
   final WidgetStateProperty<MouseCursor>? mouseCursor;
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   /// {@macro flutter.widgets.Focus.focusNode}
   final FocusNode? focusNode;
 
@@ -626,6 +632,7 @@ class _CupertinoSwitchState extends State<CupertinoSwitch> with TickerProviderSt
       ?? CupertinoColors.systemGreen,
       context,
     );
+<<<<<<< HEAD
 
     final (Color onLabelColor, Color offLabelColor)? onOffLabelColors =
       MediaQuery.onOffSwitchLabelsOf(context)
@@ -744,6 +751,40 @@ class _CupertinoSwitchState extends State<CupertinoSwitch> with TickerProviderSt
               ..iconTheme = IconTheme.of(context)
               ..surfaceColor = theme.scaffoldBackgroundColor
               ..positionController = positionController
+=======
+    if (needsPositionAnimation) {
+      _resumePositionAnimation();
+    }
+    return MouseRegion(
+      cursor: isInteractive && kIsWeb ? SystemMouseCursors.click : MouseCursor.defer,
+      child: Opacity(
+        opacity: widget.onChanged == null ? _kCupertinoSwitchDisabledOpacity : 1.0,
+        child: FocusableActionDetector(
+          onShowFocusHighlight: _onShowFocusHighlight,
+          actions: _actionMap,
+          enabled: isInteractive,
+          focusNode: widget.focusNode,
+          onFocusChange: widget.onFocusChange,
+          autofocus: widget.autofocus,
+          child: _CupertinoSwitchRenderObjectWidget(
+            value: widget.value,
+            activeColor: activeColor,
+            trackColor: CupertinoDynamicColor.resolve(widget.trackColor ?? CupertinoColors.secondarySystemFill, context),
+            thumbColor: CupertinoDynamicColor.resolve(widget.thumbColor ?? CupertinoColors.white, context),
+            // Opacity, lightness, and saturation values were approximated with
+            // color pickers on the switches in the macOS settings.
+            focusColor: CupertinoDynamicColor.resolve(
+              widget.focusColor ??
+              HSLColor
+                    .fromColor(activeColor.withOpacity(0.80))
+                    .withLightness(0.69).withSaturation(0.835)
+                    .toColor(),
+              context),
+            onChanged: widget.onChanged,
+            textDirection: Directionality.of(context),
+            isFocused: isFocused,
+            state: this,
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
           ),
         ),
       ),
@@ -751,6 +792,7 @@ class _CupertinoSwitchState extends State<CupertinoSwitch> with TickerProviderSt
   }
 }
 
+<<<<<<< HEAD
 class _SwitchPainter extends ToggleablePainter {
   AnimationController get positionController => _positionController!;
   AnimationController? _positionController;
@@ -765,16 +807,101 @@ class _SwitchPainter extends ToggleablePainter {
       parent: positionController,
       curve: Curves.easeOut,
       reverseCurve: Curves.easeIn
+=======
+class _CupertinoSwitchRenderObjectWidget extends LeafRenderObjectWidget {
+  const _CupertinoSwitchRenderObjectWidget({
+    required this.value,
+    required this.activeColor,
+    required this.trackColor,
+    required this.thumbColor,
+    required this.focusColor,
+    required this.onChanged,
+    required this.textDirection,
+    required this.isFocused,
+    required this.state,
+  });
+
+  final bool value;
+  final Color activeColor;
+  final Color trackColor;
+  final Color thumbColor;
+  final Color focusColor;
+  final ValueChanged<bool>? onChanged;
+  final _CupertinoSwitchState state;
+  final TextDirection textDirection;
+  final bool isFocused;
+
+  @override
+  _RenderCupertinoSwitch createRenderObject(BuildContext context) {
+    return _RenderCupertinoSwitch(
+      value: value,
+      activeColor: activeColor,
+      trackColor: trackColor,
+      thumbColor: thumbColor,
+      focusColor: focusColor,
+      onChanged: onChanged,
+      textDirection: textDirection,
+      isFocused: isFocused,
+      state: state,
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     );
     notifyListeners();
   }
 
   CurvedAnimation? _colorAnimation;
 
+<<<<<<< HEAD
   Icon? get activeIcon => _activeIcon;
   Icon? _activeIcon;
   set activeIcon(Icon? value) {
     if (value == _activeIcon) {
+=======
+const double _kTrackWidth = 51.0;
+const double _kTrackHeight = 31.0;
+const double _kTrackRadius = _kTrackHeight / 2.0;
+const double _kTrackInnerStart = _kTrackHeight / 2.0;
+const double _kTrackInnerEnd = _kTrackWidth - _kTrackInnerStart;
+const double _kTrackInnerLength = _kTrackInnerEnd - _kTrackInnerStart;
+const double _kSwitchWidth = 59.0;
+const double _kSwitchHeight = 39.0;
+// Opacity of a disabled switch, as eye-balled from iOS Simulator on Mac.
+const double _kCupertinoSwitchDisabledOpacity = 0.5;
+
+const Duration _kReactionDuration = Duration(milliseconds: 300);
+const Duration _kToggleDuration = Duration(milliseconds: 200);
+
+class _RenderCupertinoSwitch extends RenderConstrainedBox {
+  _RenderCupertinoSwitch({
+    required bool value,
+    required Color activeColor,
+    required Color trackColor,
+    required Color thumbColor,
+    required Color focusColor,
+    ValueChanged<bool>? onChanged,
+    required TextDirection textDirection,
+    required bool isFocused,
+    required _CupertinoSwitchState state,
+  }) : _value = value,
+       _activeColor = activeColor,
+       _trackColor = trackColor,
+       _focusColor = focusColor,
+       _thumbPainter = CupertinoThumbPainter.switchThumb(color: thumbColor),
+       _onChanged = onChanged,
+       _textDirection = textDirection,
+       _isFocused = isFocused,
+       _state = state,
+       super(additionalConstraints: const BoxConstraints.tightFor(width: _kSwitchWidth, height: _kSwitchHeight)) {
+         state.position.addListener(markNeedsPaint);
+         state._reaction.addListener(markNeedsPaint);
+  }
+
+  final _CupertinoSwitchState _state;
+
+  bool get value => _value;
+  bool _value;
+  set value(bool value) {
+    if (value == _value) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       return;
     }
     _activeIcon = value;
@@ -993,6 +1120,7 @@ class _SwitchPainter extends ToggleablePainter {
     notifyListeners();
   }
 
+<<<<<<< HEAD
   (Color onLabelColor, Color offLabelColor)? get onOffLabelColors => _onOffLabelColors;
   (Color onLabelColor, Color offLabelColor)? _onOffLabelColors;
   set onOffLabelColors((Color onLabelColor, Color offLabelColor)? value) {
@@ -1008,6 +1136,9 @@ class _SwitchPainter extends ToggleablePainter {
   ImageProvider? _cachedThumbImage;
   ImageErrorListener? _cachedThumbErrorListener;
   BoxPainter? _cachedThumbPainter;
+=======
+  bool get isInteractive => onChanged != null;
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
   ShapeDecoration _createDefaultThumbDecoration(Color color, ImageProvider? image, ImageErrorListener? errorListener) {
     return ShapeDecoration(
@@ -1099,6 +1230,7 @@ class _SwitchPainter extends ToggleablePainter {
 
     _paintTrackWith(canvas, paint, trackPaintOffset, trackOutlineColor, trackOutlineWidth, trackRect);
 
+<<<<<<< HEAD
     final double currentReactionValue = reaction.value;
     if (_onOffLabelColors != null) {
       final (Color onLabelColor, Color offLabelColor) = onOffLabelColors!;
@@ -1152,6 +1284,25 @@ class _SwitchPainter extends ToggleablePainter {
       thumbErrorListener,
       thumbIcon,
       thumbSize,
+=======
+    final double currentThumbExtension = CupertinoThumbPainter.extension * currentReactionValue;
+    final double thumbLeft = lerpDouble(
+      trackRect.left + _kTrackInnerStart - CupertinoThumbPainter.radius,
+      trackRect.left + _kTrackInnerEnd - CupertinoThumbPainter.radius - currentThumbExtension,
+      visualPosition,
+    )!;
+    final double thumbRight = lerpDouble(
+      trackRect.left + _kTrackInnerStart + CupertinoThumbPainter.radius + currentThumbExtension,
+      trackRect.left + _kTrackInnerEnd + CupertinoThumbPainter.radius,
+      visualPosition,
+    )!;
+    final double thumbCenterY = offset.dy + size.height / 2.0;
+    final Rect thumbBounds = Rect.fromLTRB(
+      thumbLeft,
+      thumbCenterY - CupertinoThumbPainter.radius,
+      thumbRight,
+      thumbCenterY + CupertinoThumbPainter.radius,
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     );
   }
 

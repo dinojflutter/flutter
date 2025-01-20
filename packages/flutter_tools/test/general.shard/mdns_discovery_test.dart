@@ -517,7 +517,10 @@ void main() {
           mdnsClient: client,
           logger: BufferLogger.test(),
           flutterUsage: TestUsage(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
 
         expect(() async => portDiscovery.queryForLaunch(applicationId: 'app-id'), throwsAssertionError);
@@ -763,7 +766,10 @@ void main() {
           mdnsClient: client,
           logger: BufferLogger.test(),
           flutterUsage: TestUsage(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
 
         final Uri? uri = await portDiscovery.getVMServiceUriForLaunch(
@@ -793,7 +799,10 @@ void main() {
           mdnsClient: client,
           logger: BufferLogger.test(),
           flutterUsage: TestUsage(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
         expect(
           portDiscovery.getVMServiceUriForLaunch(
@@ -807,7 +816,11 @@ void main() {
     });
 
     group('deviceNameMatchesTargetName', () {
+<<<<<<< HEAD
       testWithoutContext('compares case insensitive and without spaces, hyphens, .local', () {
+=======
+      testWithoutContext('compares case insensitive and without spaces, hypthens, .local', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         final MDnsVmServiceDiscovery portDiscovery = MDnsVmServiceDiscovery(
           mdnsClient: FakeMDnsClient(
             <PtrResourceRecord>[],
@@ -815,7 +828,10 @@ void main() {
           ),
           logger: BufferLogger.test(),
           flutterUsage: TestUsage(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
 
         expect(portDiscovery.deviceNameMatchesTargetName('My phone', 'My-Phone.local'), isTrue);
@@ -829,7 +845,10 @@ void main() {
           ),
           logger: BufferLogger.test(),
           flutterUsage: TestUsage(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
         expect(portDiscovery.deviceNameMatchesTargetName('My phone', 'My-Phone-2.local'), isFalse);
       });

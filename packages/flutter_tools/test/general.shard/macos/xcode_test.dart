@@ -538,7 +538,10 @@ void main() {
           fileSystem: fileSystem,
           coreDeviceControl: FakeIOSCoreDeviceControl(),
           xcodeDebug: FakeXcodeDebug(),
+<<<<<<< HEAD
           analytics: const NoOpAnalytics(),
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
       });
 
@@ -557,17 +560,23 @@ void main() {
       late XCDevice xcdevice;
       late Xcode xcode;
       late MemoryFileSystem fileSystem;
+<<<<<<< HEAD
       late FakeAnalytics fakeAnalytics;
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       late FakeIOSCoreDeviceControl coreDeviceControl;
 
       setUp(() {
         xcode = Xcode.test(processManager: FakeProcessManager.any());
         fileSystem = MemoryFileSystem.test();
         coreDeviceControl = FakeIOSCoreDeviceControl();
+<<<<<<< HEAD
         fakeAnalytics = getInitializedFakeAnalyticsInstance(
           fs: fileSystem,
           fakeFlutterVersion: FakeFlutterVersion(),
         );
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         xcdevice = XCDevice(
           processManager: fakeProcessManager,
           logger: logger,
@@ -579,7 +588,10 @@ void main() {
           fileSystem: fileSystem,
           coreDeviceControl: coreDeviceControl,
           xcodeDebug: FakeXcodeDebug(),
+<<<<<<< HEAD
           analytics: fakeAnalytics,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         );
       });
 
@@ -1477,6 +1489,7 @@ void main() {
             expect(devices[4].devModeEnabled, true);
 
             expect(fakeProcessManager, hasNoRemainingExpectations);
+<<<<<<< HEAD
 
             expect(fakeAnalytics.sentEvents, contains(
               Event.appleUsageEvent(
@@ -1484,6 +1497,8 @@ void main() {
                   parameter: 'ios-trust-failure',
                 )
             ));
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
           }, overrides: <Type, Generator>{
             Platform: () => macPlatform,
             Artifacts: () => Artifacts.test(),

@@ -115,6 +115,7 @@ abstract class XcodeBasedProject extends FlutterProjectPlatform  {
       .childDirectory('Pods')
       .childDirectory('Target Support Files')
       .childDirectory('Pods-Runner');
+<<<<<<< HEAD
 
   /// The directory in the project that is managed by Flutter. As much as
   /// possible, files that are edited by Flutter tooling after initial project
@@ -238,6 +239,8 @@ abstract class XcodeBasedProject extends FlutterProjectPlatform  {
     }
     return null;
   }
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }
 
 /// Represents the iOS sub-project of a Flutter project.

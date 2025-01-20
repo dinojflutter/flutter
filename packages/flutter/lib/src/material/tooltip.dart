@@ -530,8 +530,17 @@ class TooltipState extends State<Tooltip> with SingleTickerProviderStateMixin {
     _timer?.cancel();
     _timer = null;
     // Use _backingController instead of _controller to prevent the lazy getter
+<<<<<<< HEAD
     // from instantiating an AnimationController unnecessarily.
     if (_backingController?.isForwardOrCompleted ?? false) {
+=======
+    // from instaniating an AnimationController unnecessarily.
+    switch (_backingController?.status) {
+      case null:
+      case AnimationStatus.reverse:
+      case AnimationStatus.dismissed:
+        break;
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       // Dismiss when the tooltip is fading in: if there's a dismiss delay we'll
       // allow the fade in animation to continue until the delay timer fires.
       if (withDelay.inMicroseconds > 0) {

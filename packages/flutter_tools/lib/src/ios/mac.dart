@@ -56,7 +56,11 @@ const String kConcurrentRunFailureMessage2 = 'there are two concurrent builds ru
 String missingPlatformInstructions(String simulatorVersion) => '''
 ════════════════════════════════════════════════════════════════════════════════
 $simulatorVersion is not installed. To download and install the platform, open
+<<<<<<< HEAD
 Xcode, select Xcode > Settings > Components, and click the GET button for the
+=======
+Xcode, select Xcode > Settings > Platforms, and click the GET button for the
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 required platform.
 
 For more information, please visit:
@@ -795,6 +799,7 @@ _XCResultIssueHandlingResult _handleXCResultIssue({
     if (missingPlatform != null) {
       return _XCResultIssueHandlingResult(requiresProvisioningProfile: false, hasProvisioningProfileIssue: false, missingPlatform: missingPlatform);
     }
+<<<<<<< HEAD
   } else if (message.toLowerCase().contains('redefinition of module')) {
     final String? duplicateModule = _parseModuleRedefinition(message);
     return _XCResultIssueHandlingResult(
@@ -822,6 +827,8 @@ _XCResultIssueHandlingResult _handleXCResultIssue({
         missingModule: missingModule,
       );
     }
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   }
   return _XCResultIssueHandlingResult(requiresProvisioningProfile: false, hasProvisioningProfileIssue: false);
 }
@@ -839,8 +846,11 @@ Future<bool> _handleIssues(
   bool hasProvisioningProfileIssue = false;
   bool issueDetected = false;
   String? missingPlatform;
+<<<<<<< HEAD
   final List<String> duplicateModules = <String>[];
   final List<String> missingModules = <String>[];
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
   final XCResult? xcResult = result.xcResult;
   if (xcResult != null && xcResult.parseSuccess) {
@@ -857,12 +867,15 @@ Future<bool> _handleIssues(
         requiresProvisioningProfile = true;
       }
       missingPlatform = handlingResult.missingPlatform;
+<<<<<<< HEAD
       if (handlingResult.duplicateModule != null) {
         duplicateModules.add(handlingResult.duplicateModule!);
       }
       if (handlingResult.missingModule != null) {
         missingModules.add(handlingResult.missingModule!);
       }
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       issueDetected = true;
     }
   } else if (xcResult != null) {
@@ -886,6 +899,7 @@ Future<bool> _handleIssues(
     logger.printError("Also try selecting 'Product > Build' to fix the problem.");
   } else if (missingPlatform != null) {
     logger.printError(missingPlatformInstructions(missingPlatform), emphasis: true);
+<<<<<<< HEAD
   } else if (duplicateModules.isNotEmpty) {
     final bool usesCocoapods = xcodeProject.podfile.existsSync();
     final bool usesSwiftPackageManager = project.usesSwiftPackageManager;
@@ -927,6 +941,8 @@ Future<bool> _handleIssues(
         );
       }
     }
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   }
   return issueDetected;
 }
@@ -1005,6 +1021,7 @@ void _parseIssueInStdout(XcodeBuildExecution xcodeBuildExecution, Logger logger,
 
 String? _parseMissingPlatform(String message) {
   final RegExp pattern = RegExp(r'error:(.*?) is not installed\. To use with Xcode, first download and install the platform');
+<<<<<<< HEAD
   return pattern.firstMatch(message)?.group(1);
 }
 
@@ -1039,6 +1056,10 @@ String? _parseMissingModule(String message) {
   final RegExp pattern = RegExp(r"Module '(.*?)' not found");
   final RegExpMatch? match = pattern.firstMatch(message);
   if (match != null && match.groupCount > 0) {
+=======
+  final RegExpMatch? match = pattern.firstMatch(message);
+  if (match != null) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     final String? version = match.group(1);
     return version;
   }
@@ -1055,13 +1076,24 @@ class _XCResultIssueHandlingResult {
     this.missingModule,
   });
 
+<<<<<<< HEAD
   /// An issue indicates that user didn't provide the provisioning profile.
+=======
+  _XCResultIssueHandlingResult({
+    required this.requiresProvisioningProfile,
+    required this.hasProvisioningProfileIssue,
+    this.missingPlatform,
+  });
+
+  // An issue indicates that user didn't provide the provisioning profile.
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   final bool requiresProvisioningProfile;
 
   /// An issue indicates that there is a provisioning profile issue.
   final bool hasProvisioningProfileIssue;
 
   final String? missingPlatform;
+<<<<<<< HEAD
 
   /// An issue indicates a module is declared twice, potentially due to being
   /// used in both Swift Package Manager and CocoaPods.
@@ -1070,6 +1102,8 @@ class _XCResultIssueHandlingResult {
   /// An issue indicates a module was imported but not found, potentially due
   /// to it being Swift Package Manager compatible only.
   final String? missingModule;
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }
 
 const String _kResultBundlePath = 'temporary_xcresult_bundle';

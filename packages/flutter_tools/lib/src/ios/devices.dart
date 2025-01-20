@@ -332,11 +332,14 @@ class IOSDevice extends Device {
   @override
   bool isConnected;
 
+<<<<<<< HEAD
   bool devModeEnabled = false;
 
   /// Device has trusted this computer and paired.
   bool isPaired = false;
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   /// CoreDevice is a device connectivity stack introduced in Xcode 15. Devices
   /// with iOS 17 or greater are CoreDevices.
   final bool isCoreDevice;
@@ -481,6 +484,20 @@ class IOSDevice extends Device {
       throwToolExit('Cannot start app on wirelessly tethered iOS device. Try running again with the --publish-port flag');
     }
 
+<<<<<<< HEAD
+=======
+    // TODO(vashworth): Remove after Xcode 15 and iOS 17 are in CI (https://github.com/flutter/flutter/issues/132128)
+    // XcodeDebug workflow is used for CoreDevices (iOS 17+ and Xcode 15+).
+    // Force the use of XcodeDebug workflow in CI to test from older versions
+    // since devicelab has not yet been updated to iOS 17 and Xcode 15.
+    bool forceXcodeDebugWorkflow = false;
+    if (debuggingOptions.usingCISystem &&
+        debuggingOptions.debuggingEnabled &&
+        _platform.environment['FORCE_XCODE_DEBUG']?.toLowerCase() == 'true') {
+      forceXcodeDebugWorkflow = true;
+    }
+
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     if (!prebuiltApplication) {
       _logger.printTrace('Building ${package.name} for $id');
 
@@ -543,7 +560,11 @@ class IOSDevice extends Device {
         );
       }
 
+<<<<<<< HEAD
       if (isCoreDevice) {
+=======
+      if (isCoreDevice || forceXcodeDebugWorkflow) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         installationResult = await _startAppOnCoreDevice(
           debuggingOptions: debuggingOptions,
           package: package,
@@ -577,7 +598,11 @@ class IOSDevice extends Device {
       _logger.printTrace('Application launched on the device. Waiting for Dart VM Service url.');
 
       final int defaultTimeout;
+<<<<<<< HEAD
       if (isCoreDevice && debuggingOptions.debuggingEnabled) {
+=======
+      if ((isCoreDevice || forceXcodeDebugWorkflow) && debuggingOptions.debuggingEnabled) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         // Core devices with debugging enabled takes longer because this
         // includes time to install and launch the app on the device.
         defaultTimeout = isWirelesslyConnected ? 75 : 60;
@@ -612,6 +637,7 @@ class IOSDevice extends Device {
       });
 
       Uri? localUri;
+<<<<<<< HEAD
       if (isCoreDevice) {
         localUri = await _discoverDartVMForCoreDevice(
           debuggingOptions: debuggingOptions,
@@ -640,9 +666,37 @@ class IOSDevice extends Device {
           startAppStatus.stop();
           startAppStatus = _logger.startProgress(
             'Waiting for approval of local network permissions...',
+=======
+      if (isWirelesslyConnected) {
+        // When using a CoreDevice, device logs are unavailable and therefore
+        // cannot be used to get the Dart VM url. Instead, get the Dart VM
+        // Service by finding services matching the app bundle id and the
+        // device name.
+        //
+        // If not using a CoreDevice, wait for the Dart VM url to be discovered
+        // via logs and then get the Dart VM Service by finding services matching
+        // the app bundle id and the Dart VM port.
+        //
+        // Then in both cases, get the device IP from the Dart VM Service to
+        // construct the Dart VM url using the device IP as the host.
+        if (isCoreDevice) {
+          localUri = await MDnsVmServiceDiscovery.instance!.getVMServiceUriForLaunch(
+            packageId,
+            this,
+            usesIpv6: ipv6,
+            useDeviceIPAsHost: true,
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
           );
-        });
+        } else {
+          // Wait for Dart VM Service to start up.
+          final Uri? serviceURL = await vmServiceDiscovery?.uri;
+          if (serviceURL == null) {
+            await iosDeployDebugger?.stopAndDumpBacktrace();
+            await dispose();
+            return LaunchResult.failed();
+          }
 
+<<<<<<< HEAD
         // Get Dart VM Service URL with the device IP as the host.
         localUri = await MDnsVmServiceDiscovery.instance!.getVMServiceUriForLaunch(
           packageId,
@@ -651,9 +705,32 @@ class IOSDevice extends Device {
           deviceVmservicePort: serviceURL.port,
           useDeviceIPAsHost: true,
         );
+=======
+          // If Dart VM Service URL with the device IP is not found within 5 seconds,
+          // change the status message to prompt users to click Allow. Wait 5 seconds because it
+          // should only show this message if they have not already approved the permissions.
+          // MDnsVmServiceDiscovery usually takes less than 5 seconds to find it.
+          final Timer mDNSLookupTimer = Timer(const Duration(seconds: 5), () {
+            startAppStatus.stop();
+            startAppStatus = _logger.startProgress(
+              'Waiting for approval of local network permissions...',
+            );
+          });
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
-        mDNSLookupTimer.cancel();
+          // Get Dart VM Service URL with the device IP as the host.
+          localUri = await MDnsVmServiceDiscovery.instance!.getVMServiceUriForLaunch(
+            packageId,
+            this,
+            usesIpv6: ipv6,
+            deviceVmservicePort: serviceURL.port,
+            useDeviceIPAsHost: true,
+          );
+
+          mDNSLookupTimer.cancel();
+        }
       } else {
+<<<<<<< HEAD
         localUri = await vmServiceDiscovery?.uri;
         // If the `ios-deploy` debugger loses connection before it finds the
         // Dart Service VM url, try starting the debugger and launching the
@@ -679,6 +756,22 @@ class IOSDevice extends Device {
             return LaunchResult.failed();
           }
           localUri = await vmServiceDiscovery.uri;
+=======
+        if ((isCoreDevice || forceXcodeDebugWorkflow) && vmServiceDiscovery != null) {
+          // When searching for the Dart VM url, search for it via ProtocolDiscovery
+          // (device logs) and mDNS simultaneously, since both can be flaky at times.
+          final Future<Uri?> vmUrlFromMDns = MDnsVmServiceDiscovery.instance!.getVMServiceUriForLaunch(
+            packageId,
+            this,
+            usesIpv6: ipv6,
+          );
+          final Future<Uri?> vmUrlFromLogs = vmServiceDiscovery.uri;
+          localUri = await Future.any(
+            <Future<Uri?>>[vmUrlFromMDns, vmUrlFromLogs]
+          );
+        } else {
+          localUri = await vmServiceDiscovery?.uri;
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         }
       }
       timer.cancel();
@@ -696,7 +789,11 @@ class IOSDevice extends Device {
     } finally {
       startAppStatus.stop();
 
+<<<<<<< HEAD
       if (isCoreDevice && debuggingOptions.debuggingEnabled && package is BuildableIOSApp) {
+=======
+      if ((isCoreDevice || forceXcodeDebugWorkflow) && debuggingOptions.debuggingEnabled && package is BuildableIOSApp) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         // When debugging via Xcode, after the app launches, reset the Generated
         // settings to not include the custom configuration build directory.
         // This is to prevent confusion if the project is later ran via Xcode
@@ -710,6 +807,7 @@ class IOSDevice extends Device {
     }
   }
 
+<<<<<<< HEAD
   void _printInstallError(Directory bundle) {
     _logger.printError('Could not run ${bundle.path} on $id.');
     _logger.printError('Try launching Xcode and selecting "Product > Run" to fix the problem:');
@@ -843,6 +941,8 @@ class IOSDevice extends Device {
     );
   }
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   /// Starting with Xcode 15 and iOS 17, `ios-deploy` stopped working due to
   /// the new CoreDevice connectivity stack. Previously, `ios-deploy` was used
   /// to install the app, launch the app, and start `debugserver`.
@@ -933,8 +1033,11 @@ class IOSDevice extends Device {
           projectInfo.reportFlavorNotFoundAndExit();
         }
 
+<<<<<<< HEAD
         _xcodeDebug.ensureXcodeDebuggerLaunchAction(project.xcodeProjectSchemeFile(scheme: scheme));
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         debugProject = XcodeDebugProject(
           scheme: scheme,
           xcodeProject: project.xcodeProject,
@@ -1025,6 +1128,7 @@ class IOSDevice extends Device {
   void clearLogs() { }
 
   @override
+<<<<<<< HEAD
   VMServiceDiscoveryForAttach getVMServiceDiscoveryForAttach({
     String? appId,
     String? fuchsiaModule,
@@ -1062,6 +1166,8 @@ class IOSDevice extends Device {
   }
 
   @override
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   bool get supportsScreenshot {
     if (isCoreDevice) {
       // `idevicescreenshot` stopped working with iOS 17 / Xcode 15
@@ -1160,13 +1266,15 @@ class IOSDeviceLogReader extends DeviceLogReader {
     this._isWirelesslyConnected,
     this._isCoreDevice,
     String appName,
-    bool usingCISystem,
-  ) : // Match for lines for the runner in syslog.
+    bool usingCISystem, {
+    bool forceXcodeDebug = false,
+  }) : // Match for lines for the runner in syslog.
       //
       // iOS 9 format:  Runner[297] <Notice>:
       // iOS 10 format: Runner(Flutter)[297] <Notice>:
       _runnerLineRegex = RegExp(appName + r'(\(Flutter\))?\[[\d]+\] <[A-Za-z]+>: '),
-      _usingCISystem = usingCISystem;
+      _usingCISystem = usingCISystem,
+      _forceXcodeDebug = forceXcodeDebug;
 
   /// Create a new [IOSDeviceLogReader].
   factory IOSDeviceLogReader.create({
@@ -1185,6 +1293,7 @@ class IOSDeviceLogReader extends DeviceLogReader {
       device.isCoreDevice,
       appName,
       usingCISystem,
+      forceXcodeDebug: device._platform.environment['FORCE_XCODE_DEBUG']?.toLowerCase() == 'true',
     );
   }
 
@@ -1210,6 +1319,10 @@ class IOSDeviceLogReader extends DeviceLogReader {
   final bool _isCoreDevice;
   final IMobileDevice _iMobileDevice;
   final bool _usingCISystem;
+
+  // TODO(vashworth): Remove after Xcode 15 and iOS 17 are in CI (https://github.com/flutter/flutter/issues/132128)
+  /// Whether XcodeDebug workflow is being forced.
+  final bool _forceXcodeDebug;
 
   // Matches a syslog line from the runner.
   RegExp _runnerLineRegex;
@@ -1324,7 +1437,11 @@ class IOSDeviceLogReader extends DeviceLogReader {
     // However, `idevicesyslog` is sometimes unreliable so use Dart VM as a fallback.
     // Also, `idevicesyslog` does not work with iOS 17 wireless devices, so use the
     // Dart VM for wireless devices.
+<<<<<<< HEAD
     if (_isCoreDevice) {
+=======
+    if (_isCoreDevice || _forceXcodeDebug) {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       if (_isWirelesslyConnected) {
         return _IOSDeviceLogSources(
           primarySource: IOSDeviceLogSource.unifiedLogging,

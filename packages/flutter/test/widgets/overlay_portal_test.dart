@@ -872,6 +872,7 @@ void main() {
     verifyTreeIsClean();
   });
 
+<<<<<<< HEAD
   group('Adding/removing overlay child causes repaint', () {
     // Regression test for https://github.com/flutter/flutter/issues/134656.
     const Key childKey = Key('child');
@@ -931,13 +932,18 @@ void main() {
     });
   });
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   testWidgets('Adding/Removing OverlayPortal in LayoutBuilder during layout', (WidgetTester tester) async {
     final GlobalKey widgetKey = GlobalKey(debugLabel: 'widget');
     final GlobalKey overlayKey = GlobalKey(debugLabel: 'overlay');
     controller1.hide();
     late StateSetter setState;
+<<<<<<< HEAD
     late final OverlayEntry overlayEntry;
     addTearDown(() => overlayEntry..remove()..dispose());
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
     Size size = Size.zero;
 
     final Widget overlayPortal = OverlayPortal(
@@ -953,7 +959,11 @@ void main() {
         child: Overlay(
           key: overlayKey,
           initialEntries: <OverlayEntry>[
+<<<<<<< HEAD
             overlayEntry = OverlayEntry(
+=======
+            OverlayEntry(
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
               builder: (BuildContext context) {
                 return StatefulBuilder(
                   builder: (BuildContext context, StateSetter stateSetter) {

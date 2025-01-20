@@ -1052,33 +1052,53 @@ platform :ios, '12.0'
         project.podRunnerTargetSupportFiles = podRunnerTargetSupportFiles;
       });
 
+<<<<<<< HEAD
       testWithoutContext('skip if directory is missing', () async {
+=======
+      testWithoutContext('skip if directory is missing', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         final CocoaPodsToolchainDirectoryMigration iosProjectMigration = CocoaPodsToolchainDirectoryMigration(
           project,
           xcode15ProjectInterpreter,
           testLogger,
         );
+<<<<<<< HEAD
         await iosProjectMigration.migrate();
+=======
+        iosProjectMigration.migrate();
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(podRunnerTargetSupportFiles.existsSync(), isFalse);
 
         expect(testLogger.traceText, contains('CocoaPods Pods-Runner Target Support Files not found'));
         expect(testLogger.statusText, isEmpty);
       });
 
+<<<<<<< HEAD
       testWithoutContext('skip if xcconfig files are missing', () async {
+=======
+      testWithoutContext('skip if xcconfig files are missing', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         podRunnerTargetSupportFiles.createSync();
         final CocoaPodsToolchainDirectoryMigration iosProjectMigration = CocoaPodsToolchainDirectoryMigration(
           project,
           xcode15ProjectInterpreter,
           testLogger,
         );
+<<<<<<< HEAD
         await iosProjectMigration.migrate();
+=======
+        iosProjectMigration.migrate();
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(podRunnerTargetSupportFiles.existsSync(), isTrue);
         expect(testLogger.traceText, isEmpty);
         expect(testLogger.statusText, isEmpty);
       });
 
+<<<<<<< HEAD
       testWithoutContext('skip if nothing to upgrade', () async {
+=======
+      testWithoutContext('skip if nothing to upgrade', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         podRunnerTargetSupportFiles.createSync();
         final File debugConfig = podRunnerTargetSupportFiles.childFile('Pods-Runner.debug.xcconfig');
         const String contents = r'''
@@ -1098,13 +1118,21 @@ LIBRARY_SEARCH_PATHS = $(inherited) "${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_N
           xcode15ProjectInterpreter,
           testLogger,
         );
+<<<<<<< HEAD
         await iosProjectMigration.migrate();
+=======
+        iosProjectMigration.migrate();
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(debugConfig.existsSync(), isTrue);
         expect(testLogger.traceText, isEmpty);
         expect(testLogger.statusText, isEmpty);
       });
 
+<<<<<<< HEAD
       testWithoutContext('skipped if Xcode version below 15', () async {
+=======
+      testWithoutContext('skipped if Xcode version below 15', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         podRunnerTargetSupportFiles.createSync();
         final File debugConfig = podRunnerTargetSupportFiles.childFile('Pods-Runner.debug.xcconfig');
         const String contents = r'''
@@ -1129,13 +1157,21 @@ LIBRARY_SEARCH_PATHS = $(inherited) "${DT_TOOLCHAIN_DIR}/usr/lib/swift/${PLATFOR
           xcode14ProjectInterpreter,
           testLogger,
         );
+<<<<<<< HEAD
         await iosProjectMigration.migrate();
+=======
+        iosProjectMigration.migrate();
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(debugConfig.existsSync(), isTrue);
         expect(testLogger.traceText, contains('Detected Xcode version is 14.0.0, below 15.0'));
         expect(testLogger.statusText, isEmpty);
       });
 
+<<<<<<< HEAD
       testWithoutContext('Xcode project is migrated and ignores leading whitespace', () async {
+=======
+      testWithoutContext('Xcode project is migrated and ignores leading whitespace', () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         podRunnerTargetSupportFiles.createSync();
         final File debugConfig = podRunnerTargetSupportFiles.childFile('Pods-Runner.debug.xcconfig');
         const String contents = r'''
@@ -1155,7 +1191,11 @@ LD_RUNPATH_SEARCH_PATHS = $(inherited) /usr/lib/swift '@executable_path/../Frame
           xcode15ProjectInterpreter,
           testLogger,
         );
+<<<<<<< HEAD
         await iosProjectMigration.migrate();
+=======
+        iosProjectMigration.migrate();
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 
         expect(debugConfig.existsSync(), isTrue);
         expect(debugConfig.readAsStringSync(), r'''
@@ -1516,9 +1556,12 @@ class FakeIosProject extends Fake implements IosProject {
 
   @override
   Directory podRunnerTargetSupportFiles = MemoryFileSystem.test().directory('Pods-Runner');
+<<<<<<< HEAD
 
   @override
   File appDelegateSwift = MemoryFileSystem.test().file('AppDelegate.swift');
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 }
 
 class FakeIOSMigrator extends ProjectMigrator {

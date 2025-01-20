@@ -945,8 +945,11 @@ class TwoDimensionalChildBuilderDelegate extends TwoDimensionalChildDelegate {
     required this.builder,
     int? maxXIndex,
     int? maxYIndex,
+<<<<<<< HEAD
     this.addRepaintBoundaries = true,
     this.addAutomaticKeepAlives = true,
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
   }) : assert(maxYIndex == null || maxYIndex >= -1),
        assert(maxXIndex == null || maxXIndex >= -1),
        _maxYIndex = maxYIndex,

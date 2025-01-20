@@ -5,7 +5,10 @@
 import 'package:file/memory.dart';
 import 'package:file_testing/file_testing.dart';
 import 'package:flutter_tools/src/base/file_system.dart';
+<<<<<<< HEAD
 import 'package:flutter_tools/src/base/io.dart';
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
 import 'package:flutter_tools/src/base/logger.dart';
 import 'package:flutter_tools/src/base/version.dart';
 import 'package:flutter_tools/src/ios/core_devices.dart';
@@ -36,7 +39,11 @@ void main() {
         version: Version(14, 0, 0),
       );
       xcode = Xcode.test(
+<<<<<<< HEAD
         processManager: fakeProcessManager,
+=======
+        processManager: FakeProcessManager.any(),
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         xcodeProjectInterpreter: xcodeProjectInterpreter,
       );
       deviceControl = IOSCoreDeviceControl(
@@ -87,7 +94,10 @@ void main() {
     setUp(() {
       logger = BufferLogger.test();
       fakeProcessManager = FakeProcessManager.empty();
+<<<<<<< HEAD
       // TODO(fujino): re-use fakeProcessManager
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       xcode = Xcode.test(processManager: FakeProcessManager.any());
       deviceControl = IOSCoreDeviceControl(
         logger: logger,
@@ -156,7 +166,11 @@ void main() {
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -231,7 +245,11 @@ void main() {
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -277,7 +295,11 @@ ERROR: The file couldn’t be opened because it doesn’t exist. (NSCocoaErrorDo
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -314,7 +336,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -385,7 +411,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -460,7 +490,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -506,7 +540,11 @@ ERROR: The file couldn’t be opened because it doesn’t exist. (NSCocoaErrorDo
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -543,7 +581,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -633,7 +675,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -722,7 +768,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -792,7 +842,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -837,7 +891,11 @@ ERROR: The operation couldn?t be completed. (OSStatus error -10814.) (NSOSStatus
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -875,7 +933,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -976,7 +1038,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1084,7 +1150,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1154,7 +1224,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1222,7 +1296,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1266,7 +1344,11 @@ ERROR: The specified device was not found. (com.apple.dt.CoreDeviceError error 1
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1305,7 +1387,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1324,6 +1410,7 @@ invalid JSON
     });
 
     group('list devices', () {
+<<<<<<< HEAD
       testWithoutContext('Handles FileSystemException deleting temp directory', () async {
         final Directory tempDir = fileSystem.systemTempDirectory
             .childDirectory('core_devices.rand0');
@@ -1400,6 +1487,8 @@ invalid JSON
         expect(fakeProcessManager, hasNoRemainingExpectations);
       });
 
+=======
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
       testWithoutContext('No devices', () async {
         const String deviceControlOutput = '''
 {
@@ -1440,7 +1529,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1502,7 +1595,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1515,7 +1612,11 @@ invalid JSON
         expect(devices[0].connectionProperties, isNotNull);
         expect(devices[0].deviceProperties, isNotNull);
         expect(devices[0].hardwareProperties, isNotNull);
+<<<<<<< HEAD
         expect(devices[0].coreDeviceIdentifier, '123456BB5-AEDE-7A22-B890-1234567890DD');
+=======
+        expect(devices[0].coreDeviceIdentifer, '123456BB5-AEDE-7A22-B890-1234567890DD');
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(devices[0].visibilityClass, 'default');
 
         expect(fakeProcessManager, hasNoRemainingExpectations);
@@ -1565,7 +1666,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1578,7 +1683,11 @@ invalid JSON
         expect(devices[0].connectionProperties, isNull);
         expect(devices[0].deviceProperties, isNull);
         expect(devices[0].hardwareProperties, isNull);
+<<<<<<< HEAD
         expect(devices[0].coreDeviceIdentifier, '123456BB5-AEDE-7A22-B890-1234567890DD');
+=======
+        expect(devices[0].coreDeviceIdentifer, '123456BB5-AEDE-7A22-B890-1234567890DD');
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
         expect(devices[0].visibilityClass, 'default');
 
         expect(fakeProcessManager, hasNoRemainingExpectations);
@@ -1621,7 +1730,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1685,7 +1798,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1758,7 +1875,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1842,7 +1963,11 @@ invalid JSON
             '--json-output',
             tempFile.path,
           ],
+<<<<<<< HEAD
           onRun: (_) {
+=======
+          onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
             expect(tempFile, exists);
             tempFile.writeAsStringSync(deviceControlOutput);
           },
@@ -1897,7 +2022,11 @@ invalid JSON
               '--json-output',
               tempFile.path,
             ],
+<<<<<<< HEAD
             onRun: (_) {
+=======
+            onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
               expect(tempFile, exists);
               tempFile.writeAsStringSync(deviceControlOutput);
             },
@@ -1947,7 +2076,11 @@ invalid JSON
               '--json-output',
               tempFile.path,
             ],
+<<<<<<< HEAD
             onRun: (_) {
+=======
+            onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
               expect(tempFile, exists);
               tempFile.writeAsStringSync(deviceControlOutput);
             },
@@ -2002,7 +2135,11 @@ invalid JSON
               '--json-output',
               tempFile.path,
             ],
+<<<<<<< HEAD
             onRun: (_) {
+=======
+            onRun: () {
+>>>>>>> d211f42860350d914a5ad8102f9ec32764dc6d06
               expect(tempFile, exists);
               tempFile.writeAsStringSync(deviceControlOutput);
             },
